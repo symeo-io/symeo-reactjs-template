@@ -1,5 +1,12 @@
 {
   "name": "ReactJS Template",
+  "sidebar": {
+    "title": "Sidebar",
+    "links": {
+      "home-link-label": "Home"
+    },
+    "logout-button-label": "Logout"
+  },
   "login": {
     "title": "Login to ReactJS Template",
     "login-with-google-button-label": "Login with Google"

@@ -1,7 +1,7 @@
 import { Card, Typography } from "@mui/material";
 import LoginWithGoogleButton from "components/molecule/LoginWithGoogleButton/LoginWithGoogleButton";
 import { useAuth } from "oidc-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useIntl } from "react-intl";
 import PageTemplate from "components/templates/PageTemplate";
 import { useNavigate } from "hooks/useNavigate";
@@ -11,9 +11,11 @@ function Login() {
   const intl = useIntl();
   const navigate = useNavigate();
 
-  if (!isLoading && userData) {
-    return navigate("home");
-  }
+  useEffect(() => {
+    if (!isLoading && userData) {
+      navigate("home");
+    }
+  }, [isLoading, navigate, userData]);
 
   return (
     <PageTemplate

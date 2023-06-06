@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "oidc-react";
 import { useNavigate } from "hooks/useNavigate";
 
@@ -11,9 +11,11 @@ function AuthenticatedRoute({ component }: AuthenticatedRouteProps) {
   const navigate = useNavigate();
   const Component = component;
 
-  if (!isLoading && !userData) {
-    return navigate("login");
-  }
+  useEffect(() => {
+    if (!isLoading && !userData) {
+      navigate("login");
+    }
+  }, [isLoading, navigate, userData]);
 
   return <Component />;
 }
