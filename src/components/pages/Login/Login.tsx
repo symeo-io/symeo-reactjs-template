@@ -1,20 +1,22 @@
-import { Box, Card, Typography } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import LoginWithGoogleButton from "components/molecule/LoginWithGoogleButton/LoginWithGoogleButton";
 import { useAuth } from "oidc-react";
-import { Navigate } from "react-router-dom";
 import React from "react";
 import { useIntl } from "react-intl";
+import PageTemplate from "components/templates/PageTemplate";
+import { useNavigate } from "hooks/useNavigate";
 
 function Login() {
   const { userData, isLoading } = useAuth();
   const intl = useIntl();
+  const navigate = useNavigate();
 
   if (!isLoading && userData) {
-    return <Navigate to="/" replace={true} />;
+    return navigate("home");
   }
 
   return (
-    <Box
+    <PageTemplate
       sx={{
         flex: 1,
         display: "flex",
@@ -41,7 +43,7 @@ function Login() {
           {intl.formatMessage({ id: "login.login-with-google-button-label" })}
         </LoginWithGoogleButton>
       </Card>
-    </Box>
+    </PageTemplate>
   );
 }
 

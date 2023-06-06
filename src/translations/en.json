@@ -3,5 +3,14 @@
   "login": {
     "title": "Login to ReactJS Template",
     "login-with-google-button-label": "Login with Google"
+  },
+  "home": {
+    "title": "Pokedex"
+  },
+  "pokemon-list": {
+    "columns": {
+      "number-column-label": "#",
+      "name-column-label": "Name"
+    }
   }
 }

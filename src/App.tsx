@@ -5,17 +5,25 @@ import { config } from "config";
 import { intl } from "intl";
 import { RawIntlProvider } from "react-intl";
 import { LocalStorageContextProvider } from "providers/localStorage/LocalStorageContextProvider";
+import { store } from "store";
+import { Provider, ReactReduxContext } from "react-redux";
+import { theme } from "theme/theme";
+import { ThemeProvider } from "@mui/material";
 
 function App() {
   return (
     <AuthProvider {...config.authentication.google}>
-      <RawIntlProvider value={intl}>
-        <BrowserRouter>
-          <LocalStorageContextProvider>
-            <RoutesWrapper />
-          </LocalStorageContextProvider>
-        </BrowserRouter>
-      </RawIntlProvider>
+      <Provider store={store} context={ReactReduxContext}>
+        <RawIntlProvider value={intl}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <LocalStorageContextProvider>
+                <RoutesWrapper />
+              </LocalStorageContextProvider>
+            </BrowserRouter>
+          </ThemeProvider>
+        </RawIntlProvider>
+      </Provider>
     </AuthProvider>
   );
 }

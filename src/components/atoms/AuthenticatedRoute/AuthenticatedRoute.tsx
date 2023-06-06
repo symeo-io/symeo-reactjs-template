@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "oidc-react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "hooks/useNavigate";
 
 export type AuthenticatedRouteProps = {
   component: React.ComponentType<object>;
@@ -8,10 +8,11 @@ export type AuthenticatedRouteProps = {
 
 function AuthenticatedRoute({ component }: AuthenticatedRouteProps) {
   const { userData, isLoading } = useAuth();
+  const navigate = useNavigate();
   const Component = component;
 
   if (!isLoading && !userData) {
-    return <Navigate to="/login" replace={true} />;
+    return navigate("login");
   }
 
   return <Component />;
