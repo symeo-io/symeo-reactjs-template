@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import routes from "routing";
+import AuthenticatedRoute from "components/atoms/AuthenticatedRoute/AuthenticatedRoute";
 
 function RoutesWrapper() {
   const routeComponents = useMemo(
@@ -13,7 +14,17 @@ function RoutesWrapper() {
         } */
 
         return (
-          <Route key={route.path} path={route.path} element={<Component />} />
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              route.isSecured ? (
+                <AuthenticatedRoute component={Component} />
+              ) : (
+                <Component />
+              )
+            }
+          />
         );
       }),
     []

@@ -1,5 +1,6 @@
 import React from "react";
 import HomePage from "components/pages/Home/Home";
+import LoginPage from "components/pages/Login/Login";
 
 export type Route = {
   isSecured?: boolean;
@@ -16,6 +17,12 @@ const routes = {
     isSecured: true,
     sidebar: true,
     element: HomePage,
+  } as Route,
+  login: {
+    path: "/login",
+    isSecured: false,
+    sidebar: false,
+    element: LoginPage,
   } as Route,
   "*": {
     path: "/*",
