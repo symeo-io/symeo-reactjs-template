@@ -10,6 +10,12 @@ import Paper from "@mui/material/Paper";
 import { useIntl } from "react-intl";
 import { Box, CircularProgress } from "@mui/material";
 import InternalLink from "components/atoms/InternalLink/InternalLink";
+import { useJSONLocalStorage } from "hooks/useLocalStorage";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useCallback } from "react";
+
+const FAVORITE_POKEMON_STORAGE_KEY = "FAVORITE_POKEMON";
 
 export type PokemonListProps = PropsWithSx & {
   pokemonList: PokemonListItem[];
@@ -18,6 +24,27 @@ export type PokemonListProps = PropsWithSx & {
 
 function PokemonList({ pokemonList, isLoading = false, sx }: PokemonListProps) {
   const intl = useIntl();
+  const [favorites, setFavorites] = useJSONLocalStorage<string[]>(
+    FAVORITE_POKEMON_STORAGE_KEY
+  );
+
+  const addToFavorite = useCallback(
+    (pokemon: PokemonListItem) => {
+      if (!favorites?.includes(pokemon.name)) {
+        setFavorites(favorites ? [...favorites, pokemon.name] : [pokemon.name]);
+      }
+    },
+    [favorites, setFavorites]
+  );
+
+  const removeFromFavorites = useCallback(
+    (pokemon: PokemonListItem) => {
+      if (favorites) {
+        setFavorites(favorites.filter((name) => name !== pokemon.name));
+      }
+    },
+    [favorites, setFavorites]
+  );
 
   return (
     <TableContainer component={Paper} sx={{ ...sx }}>
@@ -62,7 +89,19 @@ function PokemonList({ pokemonList, isLoading = false, sx }: PokemonListProps) {
                     {pokemon.name}
                   </InternalLink>
                 </TableCell>
-                <TableCell align="right"></TableCell>
+                <TableCell align="right">
+                  {favorites?.includes(pokemon.name) ? (
+                    <StarIcon
+                      onClick={() => removeFromFavorites(pokemon)}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  ) : (
+                    <StarBorderIcon
+                      onClick={() => addToFavorite(pokemon)}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
