@@ -163,7 +163,9 @@ Calls to REST APIs are performed using the [RTK Query](https://redux-toolkit.js.
 
 It uses `redux` and is set up in the [App.tsx](./src/App.tsx) file to declare the redux [store](./src/store.ts) with the `Provider` given by the library.
 
-APIs are then declared and configured in the [api.ts](./src/api/api.ts) file. Different series of endpoints can be declared in separated files like so:
+APIs are then declared and configured in the [api.ts](./src/api/api.ts) file. Root url and logic to send Authentication token is defined in this file. 
+
+Different series of endpoints can then be declared in separated files like so:
 
 - `scr/api/api`: Root declaration of the api
 - `scr/api/api/pokemon/pokemon.api.ts`: Declaration of the routes related to pokemon
