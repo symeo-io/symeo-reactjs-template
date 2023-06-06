@@ -1,5 +1,5 @@
 import { PropsWithSx } from "types/PropsWithSx";
-import { Pokemon } from "api/pokemon/pokemon.types";
+import { PokemonListItem } from "api/pokemon/pokemon.types";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,9 +9,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useIntl } from "react-intl";
 import { Box, CircularProgress } from "@mui/material";
+import InternalLink from "components/atoms/InternalLink/InternalLink";
 
 export type PokemonListProps = PropsWithSx & {
-  pokemonList: Pokemon[];
+  pokemonList: PokemonListItem[];
   isLoading?: boolean;
 };
 
@@ -56,7 +57,11 @@ function PokemonList({ pokemonList, isLoading = false, sx }: PokemonListProps) {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{pokemon.name}</TableCell>
+                <TableCell>
+                  <InternalLink to="pokemon" params={{ name: pokemon.name }}>
+                    {pokemon.name}
+                  </InternalLink>
+                </TableCell>
                 <TableCell align="right"></TableCell>
               </TableRow>
             ))}

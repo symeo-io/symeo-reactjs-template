@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { config } from "config";
 import { UserManager } from "oidc-react";
 
-export const apiTagTypes = ["PokemonList"];
+export const apiTagTypes = ["PokemonList", "Pokemon"];
 
 export const api = createApi({
   tagTypes: apiTagTypes,
